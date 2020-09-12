@@ -1,87 +1,56 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+// Copyright 2018 The Chromium Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style license that can be
+// found in the LICENSE file.
+
 import 'package:flutter/material.dart';
 
-void main() => runApp(MyApp());
+import 'camera_preview_scanner.dart';
+import 'material_barcode_scanner.dart';
+import 'picture_scanner.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'AnimalEd',
-      home: MyHomePage(),
-    );
-  }
+void main() {
+  runApp(
+    MaterialApp(
+      routes: <String, WidgetBuilder>{
+        '/': (BuildContext context) => _ExampleList(),
+        '/$PictureScanner': (BuildContext context) => PictureScanner(),
+      },
+    ),
+  );
 }
 
-class MyHomePage extends StatefulWidget {
+class _ExampleList extends StatefulWidget {
   @override
-  _MyHomePageState createState() {
-    return _MyHomePageState();
-  }
+  State<StatefulWidget> createState() => _ExampleListState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _ExampleListState extends State<_ExampleList> {
+  static final List<String> _exampleWidgetNames = <String>[
+    '$PictureScanner',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('AnimalEd'), backgroundColor: Colors.red,),
-      body: _buildBody(context),
-    );
-  }
+      appBar: AppBar(
+        title: const Text('Example List'),
+      ),
+      body: ListView.builder(
+        itemCount: _exampleWidgetNames.length,
+        itemBuilder: (BuildContext context, int index) {
+          final String widgetName = _exampleWidgetNames[index];
 
-  Widget _buildBody(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('baby').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-    );
-  }
-
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
-
-    return Padding(
-      key: ValueKey(record.name),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-          title: Text(record.name),
-          trailing: Text(record.votes.toString()),
-          onTap: () => print(record),
-        ),
+          return Container(
+            decoration: const BoxDecoration(
+              border: Border(bottom: BorderSide(color: Colors.grey)),
+            ),
+            child: ListTile(
+              title: Text(widgetName),
+              onTap: () => Navigator.pushNamed(context, '/$widgetName'),
+            ),
+          );
+        },
       ),
     );
   }
-}
-
-class Record {
-  final String name;
-  final int votes;
-  final DocumentReference reference;
-
-  Record.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['name'] != null),
-        assert(map['votes'] != null),
-        name = map['name'],
-        votes = map['votes'];
-
-  Record.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  @override
-  String toString() => "Record<$name:$votes>";
 }
