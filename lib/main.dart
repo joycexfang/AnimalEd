@@ -33,7 +33,8 @@ class _ExampleListState extends State<_ExampleList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Example List'),
+        title: const Text('AnimalEd'),
+        backgroundColor: Colors.lightGreen[300],
       ),
       body: ListView.builder(
         itemCount: _exampleWidgetNames.length,
