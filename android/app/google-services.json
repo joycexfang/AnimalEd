@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "855282482109",
+    "firebase_url": "https://animaled-a1844.firebaseio.com",
+    "project_id": "animaled-a1844",
+    "storage_bucket": "animaled-a1844.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:855282482109:android:4e0a9a58196ae7161c30d4",
+        "android_client_info": {
+          "package_name": "com.example.AnimalEd"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "855282482109-bfrld9a10edpgf6uh8f4l8moi39puin3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA88xKuoX_-UyV37MErJ2yXQpWb6XpOg-I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "855282482109-bfrld9a10edpgf6uh8f4l8moi39puin3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
