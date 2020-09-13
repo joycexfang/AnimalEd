@@ -12,6 +12,8 @@ import 'package:image_picker/image_picker.dart';
 
 import 'detector_painters.dart';
 
+String animalName;
+
 class PictureScanner extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _PictureScannerState();
@@ -76,6 +78,11 @@ class _PictureScannerState extends State<PictureScanner> {
 
     results = await _imageLabeler.processImage(visionImage);
 
+    for (ImageLabel label in results) {
+      animalName = label.text;
+      break;
+    }
+
     setState(() {
       _scanResults = results;
     });
@@ -103,14 +110,14 @@ class _PictureScannerState extends State<PictureScanner> {
       child: _imageSize == null || _scanResults == null
           ? const Center(
               child: Text(
-                'Scanning...',
+                'Scanning your animal...',
                 style: TextStyle(
-                  color: Colors.green,
+                  color: Colors.white,
                   fontSize: 30.0,
                 ),
               ),
             )
-          : _buildResults(_imageSize, _scanResults),
+          : Text(animalName, style: TextStyle(fontSize: 30, color: Colors.white),),
     );
   }
 
@@ -118,15 +125,17 @@ class _PictureScannerState extends State<PictureScanner> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Picture Scanner'),
+        title: const Text('AnimalEd'),
+        backgroundColor: Colors.lightGreen[300],
       ),
       body: _imageFile == null
-          ? const Center(child: Text('No image selected.'))
+          ? const Center(child: Text('Select an image of an animal to begin!', style: TextStyle(fontSize: 20)))
           : _buildImage(),
       floatingActionButton: FloatingActionButton(
         onPressed: _getAndScanImage,
         tooltip: 'Pick Image',
         child: const Icon(Icons.add_a_photo),
+        backgroundColor: Colors.lightGreen[300],
       ),
     );
   }
