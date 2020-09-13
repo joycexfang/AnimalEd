@@ -135,19 +135,19 @@ class _PictureScannerState extends State<PictureScanner> {
         ),
       ),
       child: _imageSize == null || _scanResults == null
-          ? const Center(
+          ? Center(
               child: Text(
 
                 'Scanning your animal...',
-                style: TextStyle(
+                style: TextStyle(backgroundColor: Colors.lightGreen[300].withOpacity(0.6),
                   color: Colors.white,
                   fontSize: 30.0,
                 ),
               ),
             )
           : Padding(
-        padding: EdgeInsets.all(20.0),
-        child: Text("Your animal: " + animalName + "\n" + "Classification: " + animalClass, style: TextStyle(fontSize: 30, color: Colors.white, backgroundColor: Colors.lightGreen[300].withOpacity(0.6)),),
+        padding: EdgeInsets.only(top: 240.0),
+        child: Text("Your animal: " + animalName + "\n" + "Classification: " + animalClass, textAlign: TextAlign.center, style: TextStyle(fontSize: 30, color: Colors.white, backgroundColor: Colors.lightGreen[300].withOpacity(0.6)),),
       )
     );
   }
