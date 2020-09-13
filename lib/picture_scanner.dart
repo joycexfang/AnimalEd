@@ -11,8 +11,10 @@ import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
 import 'detector_painters.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 String animalName;
+String animalClass;
 
 class PictureScanner extends StatefulWidget {
   @override
@@ -83,6 +85,8 @@ class _PictureScannerState extends State<PictureScanner> {
       break;
     }
 
+    animalClass = "Hello";
+
     setState(() {
       _scanResults = results;
     });
@@ -98,6 +102,17 @@ class _PictureScannerState extends State<PictureScanner> {
     );
   }
 
+  // Returns Animal's Classification
+  // Future<void> getAnimalClass() async {
+    // var result = await Firestore.instance
+    //     .collection("animals")
+    //     .where("Title", isEqualTo: animalName)
+    //     .getDocuments();
+    // result.documents.forEach((res) {
+    //   animalClass = "hello";
+    // });
+  // }
+
   Widget _buildImage() {
     return Container(
       constraints: const BoxConstraints.expand(),
@@ -110,6 +125,7 @@ class _PictureScannerState extends State<PictureScanner> {
       child: _imageSize == null || _scanResults == null
           ? const Center(
               child: Text(
+
                 'Scanning your animal...',
                 style: TextStyle(
                   color: Colors.white,
@@ -117,7 +133,7 @@ class _PictureScannerState extends State<PictureScanner> {
                 ),
               ),
             )
-          : Text(animalName, style: TextStyle(fontSize: 30, color: Colors.white),),
+          : Text(animalName + "\n" + animalClass, style: TextStyle(fontSize: 30, color: Colors.white),),
     );
   }
 
@@ -129,7 +145,7 @@ class _PictureScannerState extends State<PictureScanner> {
         backgroundColor: Colors.lightGreen[300],
       ),
       body: _imageFile == null
-          ? const Center(child: Text('Select an image of an animal to begin!', style: TextStyle(fontSize: 20)))
+          ? const Center(child: Text('Select an image of an animal to begin!!', style: TextStyle(fontSize: 20)))
           : _buildImage(),
       floatingActionButton: FloatingActionButton(
         onPressed: _getAndScanImage,
