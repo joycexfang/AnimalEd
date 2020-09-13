@@ -21,11 +21,16 @@ final animals = [
   {"title": "Dog", "class": "Mammal"},
   {"title": "Cat", "class": "Mammal"},
   {"title": "Snake", "class": "Reptile"},
-  {"title": "Parrot", "class": "Bird"},
+  {"title": "Bird", "class": "Also a Bird!"},
   {"title": "Horse", "class": "Mammal"},
   {"title": "Frog", "class": "Amphibian"},
   {"title": "Giraffe", "class": "Mammal"},
-  {"title": "Tortoise", "class": "Reptile"}
+  {"title": "Turtle", "class": "Reptile"},
+  {"title": "Rabbit", "class": "Mammal"},
+  {"title": "Tiger", "class": "Mammal"},
+  {"title": "Fish", "class": "Also a Fish"},
+  {"title": "Zebra", "class": "Mammal"}
+
 ];
 
 class PictureScanner extends StatefulWidget {
