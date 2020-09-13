@@ -145,7 +145,18 @@ class _PictureScannerState extends State<PictureScanner> {
         backgroundColor: Colors.lightGreen[300],
       ),
       body: _imageFile == null
-          ? const Center(child: Text('Select an image of an animal to begin!!', style: TextStyle(fontSize: 20)))
+          ? Center(child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+
+              // Padding(padding: EdgeInsets.only(bottom: 70.0), child: Image.asset('images/logo.png'),),
+
+              Image.asset('images/logo.png'),
+              Padding(padding: EdgeInsets.only(bottom: 140.0), child: Text('Select an image of an animal to begin!', style: TextStyle(fontSize: 20))),
+
+              // Text('Select an image of an animal to begin!', style: TextStyle(fontSize: 20))
+            ],
+          ))
           : _buildImage(),
       floatingActionButton: FloatingActionButton(
         onPressed: _getAndScanImage,
