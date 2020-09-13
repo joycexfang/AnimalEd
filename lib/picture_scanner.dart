@@ -16,6 +16,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 String animalName;
 String animalClass;
 
+final animals = [
+  {"title": "Elephant", "class": "Mammal"},
+  {"title": "Dog", "class": "Mammal"},
+  {"title": "Cat", "class": "Mammal"},
+  {"title": "Snake", "class": "Reptile"},
+  {"title": "Parrot", "class": "Bird"},
+];
+
 class PictureScanner extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => _PictureScannerState();
@@ -85,7 +93,11 @@ class _PictureScannerState extends State<PictureScanner> {
       break;
     }
 
-    animalClass = "Hello";
+    for (var animal in animals) {
+      if (animal['title'] == animalName) {
+        animalClass = animal['class'];
+      }
+    }
 
     setState(() {
       _scanResults = results;
@@ -133,7 +145,10 @@ class _PictureScannerState extends State<PictureScanner> {
                 ),
               ),
             )
-          : Text(animalName + "\n" + animalClass, style: TextStyle(fontSize: 30, color: Colors.white),),
+          : Padding(
+        padding: EdgeInsets.all(20.0),
+        child: Text("Your animal: " + animalName + "\n" + "Classification: " + animalClass, style: TextStyle(fontSize: 30, color: Colors.white),),
+      )
     );
   }
 
