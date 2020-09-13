@@ -131,7 +131,7 @@ class _PictureScannerState extends State<PictureScanner> {
       decoration: BoxDecoration(
         image: DecorationImage(
           image: Image.file(_imageFile).image,
-          fit: BoxFit.fill,
+          fit: BoxFit.cover,
         ),
       ),
       child: _imageSize == null || _scanResults == null
@@ -147,7 +147,7 @@ class _PictureScannerState extends State<PictureScanner> {
             )
           : Padding(
         padding: EdgeInsets.all(20.0),
-        child: Text("Your animal: " + animalName + "\n" + "Classification: " + animalClass, style: TextStyle(fontSize: 30, color: Colors.white),),
+        child: Text("Your animal: " + animalName + "\n" + "Classification: " + animalClass, style: TextStyle(fontSize: 30, color: Colors.white, backgroundColor: Colors.lightGreen[300].withOpacity(0.6)),),
       )
     );
   }
